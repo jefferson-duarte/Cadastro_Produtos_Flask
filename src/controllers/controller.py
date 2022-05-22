@@ -10,7 +10,11 @@ class IndexController(MethodView):
         with mysql.cursor() as cur:
             cur.execute("SELECT * FROM produtos")
             data = cur.fetchall()
-        return render_template('public/index.html', data=data)
+            
+            cur.execute("SELECT * FROM categories")
+            categories = cur.fetchall()
+            
+        return render_template('public/index.html', data=data, categories=categories)
 
 
     def post(self):
@@ -18,10 +22,10 @@ class IndexController(MethodView):
         name = request.form['name']
         stock = request.form['stock']
         value = request.form['value']
-        # category = request.form['category']
+        category = request.form['category']
         
         with mysql.cursor() as cur:
-            cur.execute("INSERT INTO produtos(code, name, stock, value) VALUES (%s,%s,%s,%s)", (code, name, stock, value))
+            cur.execute("INSERT INTO produtos VALUES (%s, %s, %s, %s, %s)", (code, name, stock, value, category))
             cur.connection.commit()
             return redirect('/')
 
@@ -51,3 +55,17 @@ class UpdateProdutoController(MethodView):
             cur.execute("UPDATE produtos SET code=%s, name=%s, stock=%s, value=%s WHERE code=%s", (productCode, name, stock, value, code))
             cur.connection.commit()
             return redirect('/')
+        
+
+class CategotiasController(MethodView):
+    def get(self):
+        return render_template('public/categories.html')
+    
+    def post(self):
+        id = request.form['name']
+        name = request.form['name']
+        description = request.form['description']
+        with mysql.cursor() as cur:
+            cur.execute("INSERT INTO categories VALUES (%s, %s, %s)", (id, name, description))
+            cur.connection.commit()
+            return 'Sucesso.'
