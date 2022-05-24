@@ -1,6 +1,6 @@
 from itertools import product
 from flask.views import MethodView
-from flask import request, render_template, redirect
+from flask import request, render_template, redirect, flash
 from src.db import mysql
 
 
@@ -25,8 +25,13 @@ class IndexController(MethodView):
         category = request.form['category']
         
         with mysql.cursor() as cur:
-            cur.execute("INSERT INTO produtos VALUES (%s, %s, %s, %s, %s)", (code, name, stock, value, category))
-            cur.connection.commit()
+            try:
+                cur.execute("INSERT INTO produtos VALUES (%s, %s, %s, %s, %s)", (code, name, stock, value, category))
+                cur.connection.commit()
+                flash('Produto Cadastrado com Sucesso!', 'success')
+            except:
+                flash('Erro ao cadastrar produto', 'error')
+                
             return redirect('/')
 
 
@@ -57,12 +62,12 @@ class UpdateProdutoController(MethodView):
             return redirect('/')
         
 
-class CategotiasController(MethodView):
+class CategoriesController(MethodView):
     def get(self):
         return render_template('public/categories.html')
     
     def post(self):
-        id = request.form['name']
+        id = request.form['id']
         name = request.form['name']
         description = request.form['description']
         with mysql.cursor() as cur:

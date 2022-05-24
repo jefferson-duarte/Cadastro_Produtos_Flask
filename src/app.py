@@ -3,6 +3,10 @@ from src.routes.routes import *
 
 app = Flask(__name__)
 
+app.config.from_mapping(
+    SECRET_KEY = 'jefferson'
+)
+
 app.add_url_rule(routes['index_route'], view_func=routes['indexcontroller'])
 
 app.add_url_rule(routes['delete_route'], view_func=routes['delete_controller'])
