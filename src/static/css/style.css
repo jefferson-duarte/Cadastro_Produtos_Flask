@@ -1,0 +1,55 @@
+.modal-title{
+    margin-bottom:0;
+    line-height:1.5;
+    background-color: #a3606d;
+    color: white;
+}
+
+.modal-header{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid white;
+    border-top-left-radius: calc(.3rem -1px);
+    border-top-right-radius: calc(.3rem -1px);
+    background-color: #a3606d;
+}
+
+.modal-body{
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+    background-color: white;
+}
+
+.modal-dialog .modal-content{
+    border: 0;
+    border-radius: .125rem;
+    background-color: white;
+    -webkit-box-shadow: 0 5px 11px rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+    box-shadow: 0 5px 11px rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 18%);
+}
+
+.card{
+    background-color: #e8e3df;
+}
+
+.card-header{
+    text-align: center;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #A3606D;
+    border-bottom: 1px solid rgb(0, 0, 0, .125);
+    color: white;
+}
+
+.md-form label{
+    font-size: 1rem;
+    color: #208943;
+    font-weight: 5rem;
+}

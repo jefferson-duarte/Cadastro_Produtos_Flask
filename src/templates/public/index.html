@@ -1,33 +1,61 @@
 {% extends 'base.html' %}
+{% block title %} Loja Flask {% endblock %}
 
 {% block content %}
 
-    <form action="/" method="POST">
-        <input type="number" name="code" placeholder="Código do Produto">
-        <input type="text" name="name" placeholder="Nome do Produto">
-        <input type="number" name="stock" placeholder="Quantidade em Estoque">
-        <input type="number" name="value" placeholder="Valor do Produto">
-        
-        <select name="category">
-            <option selected> Selecione uma Categoria</option>
-            {% for categorie in categories %}
-                <option value="{{ categorie.0 }}">{{ categorie.1 }}</option>
-            {% endfor %}
-        </select>
+    <main id="main" >
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-lg-12 d-flex">
+                    <div id="content-main" class="justify-content-center align-self-center mx-auto my-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Cadastro de Produtos</h3>
+                            </div>
+                            <div class="card-body">
+                                <div action="/" method="POST" class="p-10" >
 
-        <button type="submit">Cadastrar</button>
-    </form>
+                                    <div class="md-form row">
+                                        <div class="col">
+                                            <input type="number" name="code" class="form-control" id="codeInput" required autofocus>
+                                            <label for="codeInput">Produto ID</label>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" name="name" class="form-control" id="nameInput" required autofocus>
+                                            <label for="nameInput">Nome Produto</label>
+                                        </div>
+                                    </div>
 
-{% for product in data %}
-    {{ product.1 }}
+                                    <div class="md-form row">
+                                        <div class="col">
+                                            <input type="number" name="stock" class="form-control" id="stockInput" required autofocus>
+                                            <label for="stockInput">Estoque do Produto</label>
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" name="value" class="form-control" id="valueInput" required autofocus>
+                                            <label for="valueInput">Valor</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="md-form">
+                                        <select name="category" class="mdb-select" id="categoryInput">
+                                            <option selected>Selecione Categoria</option>
+                                            {% for categorie in categories %}
 
-    <form action="/delete/product/{{ product.0 }}" method="POST">
-        <button>Deletar</button>
-    </form>
+                                                <option value="{{ categorie.0 }}">{{ categorie.1 }}</option>
 
-    <a href="/update/product/{{ product.0 }}">Atualizar</a> <br>
-{% else %}
-    <h1>Não tem produtos cadastrados</h1>
-{% endfor %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 {% endblock %}
