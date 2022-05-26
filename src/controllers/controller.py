@@ -38,8 +38,12 @@ class IndexController(MethodView):
 class DeteleProdutoController(MethodView):
     def post(self, code):
         with mysql.cursor() as cur:
-            cur.execute("DELETE FROM produtos WHERE code =%s", (code,))
-            cur.connection.commit()
+            try:
+                cur.execute("DELETE FROM produtos WHERE code =%s", (code,))
+                cur.connection.commit()
+                flash('Produto excluido com sucesso!', 'success')
+            except:
+                flash('Erro ao excluir o produto', 'error')
             return redirect('/')
         
         
@@ -57,8 +61,13 @@ class UpdateProdutoController(MethodView):
         value = request.form['value']
         
         with mysql.cursor() as cur:
-            cur.execute("UPDATE produtos SET code=%s, name=%s, stock=%s, value=%s WHERE code=%s", (productCode, name, stock, value, code))
-            cur.connection.commit()
+            try:
+                cur.execute("UPDATE produtos SET code=%s, name=%s, stock=%s, value=%s WHERE code=%s", (productCode, name, stock, value, code))
+                cur.connection.commit()
+                flash('Produto atualizado com sucesso', 'success')
+            except:
+                flash('Erro ao atualizar o produto.', 'error')
+                
             return redirect('/')
         
 
