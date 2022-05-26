@@ -73,4 +73,4 @@ class CategoriesController(MethodView):
         with mysql.cursor() as cur:
             cur.execute("INSERT INTO categories VALUES (%s, %s, %s)", (id, name, description))
             cur.connection.commit()
-            return 'Sucesso.'
+            return redirect('/')
